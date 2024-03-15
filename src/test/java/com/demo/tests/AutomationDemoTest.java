@@ -15,14 +15,14 @@ import org.testng.annotations.Test;
 
 public class AutomationDemoTest extends BaseTest  {
 
-
+    //ExtentTest test;
     @Test
     public void RegistrationTest(){
         Driver.getDriver().get("https://demo.automationtesting.in/Register.html");
         Faker faker = new Faker();
 
         // Locate and interact with the elements on the registration form
-        WebElement firstName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='First Name']"));
+        WebElement firstName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='First Names']"));
         firstName.sendKeys("John");
 
         WebElement lastName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='Last Name']"));
