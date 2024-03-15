@@ -22,7 +22,7 @@ public class AutomationDemoTest extends BaseTest  {
         Faker faker = new Faker();
 
         // Locate and interact with the elements on the registration form
-        WebElement firstName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='First Names']"));
+        WebElement firstName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='First Name']"));
         firstName.sendKeys("John");
 
         WebElement lastName = Driver.getDriver().findElement(By.xpath("//input[@placeholder='Last Name']"));
@@ -62,7 +62,7 @@ public class AutomationDemoTest extends BaseTest  {
 
         // Upload Photo
         WebElement chooseFileButton = Driver.getDriver().findElement(By.id("imagesrc"));
-        chooseFileButton.sendKeys("C:\\IntactixQATestUtility\\apache-jmeter-5.5\\bin\\AakasaAir.jpg");
+        chooseFileButton.sendKeys("src/test/resources/AakasaAir.jpg");
         WebElement email = Driver.getDriver().findElement(By.xpath("//input[@type='email']"));
         WebElement tel = Driver.getDriver().findElement(By.xpath("//input[@type='tel']"));
         WebElement gender = Driver.getDriver().findElement(By.xpath("//input[@value='Male']"));
