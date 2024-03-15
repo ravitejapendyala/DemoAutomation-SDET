@@ -3,13 +3,7 @@
 <suite name="All Test Suite">
     <test name="Sample tests on Orange hrm live">
         <classes>
-            <class name="com.sample.runners.CukesRunner" />
-<!--            <class name="com.sample.runners.CukesRunner2" />-->
-        </classes>
-    </test>
-    <test name="Rerun failed app tests">
-        <classes>
-            <class name="com.sample.runners.FailedRun" />
+            <class name="com.demo.tests.AutomationDemoTest" />
         </classes>
     </test>
 </suite>
