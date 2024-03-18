@@ -53,7 +53,7 @@ public class BaseTest {
     @BeforeMethod
     public synchronized void startDriver(@Optional String browser) {
 
-        // System.out.println("@BeforeMethod: @BeforeMethod" + browser);
+
         browser = setBrowserValue(browser);
 
         // setDriver(new DriverManagerOriginal().initializeDriver(browser));

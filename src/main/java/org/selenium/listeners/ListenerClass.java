@@ -26,10 +26,6 @@ import static org.selenium.constants.FrameworkConstants.*;
 
 public class ListenerClass implements ITestListener, ISuiteListener {
 
-	/*static int count_passedTCs;
-	static int count_skippedTCs;
-	static int count_failedTCs;
-	static int count_totalTCs;*/
 
 	@Override
 	public void onStart(ISuite suite) {
@@ -48,8 +44,7 @@ public class ListenerClass implements ITestListener, ISuiteListener {
 	@Override
 	public void onTestStart(ITestResult result) {
 
-		// System.out.println("onTestStart() ");
-		//count_totalTCs = count_totalTCs + 1;
+
 		ExtentReport.createTest(result.getMethod().getMethodName());
 		// ExtentReport.createTest(result.getMethod().getDescription());
 		// ExtentLogger.info("<b>" +

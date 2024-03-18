@@ -393,7 +393,7 @@ public class BrowserUtils {
      */
 
 
-    public static WebElement findElement(final WebDriver driver, final By locator, final int timeoutSeconds, String click)  {
+    public static WebElement findElement(final WebDriver driver, final By locator, final int timeoutSeconds, String click) throws CustomException {
 
         FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).
                 withTimeout(Duration.ofSeconds(timeoutSeconds / 5)).withMessage("Not able to locate element WEB_element " + locator).
@@ -412,15 +412,17 @@ public class BrowserUtils {
                 }
                 break;
             } catch (Exception e) {
+                throw new CustomException("Elements " + locator + " is not visible");
             }
         }
+
 
         return element;
 
     }
 
     //Method Overloading
-    public static WebElement findElement(final WebDriver driver, final By locator, final int timeoutSeconds){
+    public static WebElement findElement(final WebDriver driver, final By locator, final int timeoutSeconds) throws CustomException {
 
         return findElement(driver, locator, timeoutSeconds, "find");
     }
