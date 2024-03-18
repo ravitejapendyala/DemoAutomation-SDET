@@ -9,16 +9,18 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.sql.Driver;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertTrue;
+import static org.selenium.driver.DriverManager.getDriver;
 
 public class BrowserUtils {
 
     public void navigateTo (String navigationUrl){
-        Driver.getDriver().get(navigationUrl);
+        getDriver().get(navigationUrl);
     }
     public static void clickByElement (WebElement elementToClick){
         Waits.waitForClickability(elementToClick,30);
@@ -32,7 +34,7 @@ public class BrowserUtils {
 
     public void performActionsClick(WebElement elementToClick) {
         Waits.waitForClickability(elementToClick, 30);
-        Actions act = new Actions(Driver.getDriver());
+        Actions act = new Actions(getDriver());
         act.moveToElement(elementToClick).click().build().perform();
     }
 
@@ -48,7 +50,7 @@ public class BrowserUtils {
     }
 
     public void actionsType(WebElement element, String data) {
-        Actions act = new Actions(Driver.getDriver());
+        Actions act = new Actions(getDriver());
         act.moveToElement(element)
                 .sendKeys(data).build().perform();
     }
@@ -86,9 +88,9 @@ public class BrowserUtils {
      * @param expectedTitle
      */
     public static void assertTitle(String expectedTitle, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.titleIs(expectedTitle));
-        String actualTitle = Driver.getDriver().getTitle();
+        String actualTitle = getDriver().getTitle();
         Assert.assertEquals(expectedTitle, actualTitle);
     }
 
@@ -111,37 +113,37 @@ public class BrowserUtils {
      * returns to original window if windows with given title not found
      */
     public static void switchToWindow(String targetTitle) {
-        String origin = Driver.getDriver().getWindowHandle();
-        for (String handle : Driver.getDriver().getWindowHandles()) {
-            Driver.getDriver().switchTo().window(handle);
-            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+        String origin = getDriver().getWindowHandle();
+        for (String handle : getDriver().getWindowHandles()) {
+            getDriver().switchTo().window(handle);
+            if (getDriver().getTitle().equals(targetTitle)) {
                 return;
             }
         }
-        Driver.getDriver().switchTo().window(origin);
+        getDriver().switchTo().window(origin);
     }
 
     public String getTitle() {
-        return Driver.getDriver().getTitle();
+        return getDriver().getTitle();
     }
 
     public void switchToFrame(WebElement element) {
         Waits.waitForVisibility(element, 120);
-        Driver.getDriver().switchTo().frame(element);
+        getDriver().switchTo().frame(element);
     }
 
     public void switchToDefaultContent() {
 
-        Driver.getDriver().switchTo().defaultContent();
+        getDriver().switchTo().defaultContent();
     }
 
     public static void hover(WebElement element) {
-        Actions actions = new Actions(Driver.getDriver());
+        Actions actions = new Actions(getDriver());
         actions.moveToElement(element).perform();
     }
 
     public void waitUntilLoadingDisappears() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(120));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//div[@class='block-ui-message ng-binding'][text()='Loading...']")));
     }
 
@@ -158,7 +160,7 @@ public class BrowserUtils {
      */
     public static void verifyElementDisplayed(By by) {
         try {
-            assertTrue("Element not visible: " + by, Driver.getDriver().findElement(by).isDisplayed());
+            assertTrue("Element not visible: " + by, getDriver().findElement(by).isDisplayed());
         } catch (NoSuchElementException e) {
             Assert.fail("Element not found: " + by);
         }
@@ -233,8 +235,8 @@ public class BrowserUtils {
      * @param element
      */
     public static void clickWithJS(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", element);
     }
 
     /**
@@ -243,7 +245,7 @@ public class BrowserUtils {
      * @param element
      */
     public static void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     /**
@@ -252,7 +254,7 @@ public class BrowserUtils {
      * @param element
      */
     public void doubleClick(WebElement element) {
-        new Actions(Driver.getDriver()).doubleClick(element).build().perform();
+        new Actions(getDriver()).doubleClick(element).build().perform();
     }
 
     /**
@@ -263,16 +265,16 @@ public class BrowserUtils {
      * @param attributeValue
      */
     public void setAttribute(WebElement element, String attributeName, String attributeValue) {
-        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attributeName, attributeValue);
     }
 
     public static void scrollDownToWindow() {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("window.scrollBy(0,500)");
     }
 
     public static void scrollDownToWindow(int count) {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         for (int i = 1; i <= count; i++) {
             Waits.waitFixedTime(2);
             jse.executeScript("window.scrollBy(0,500)");
@@ -280,7 +282,7 @@ public class BrowserUtils {
     }
 
     public static void scrollUpToWindow(int count) {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         for (int i = 1; i <= count; i++) {
             Waits.waitFixedTime(2);
             jse.executeScript("window.scrollBy(0,-500)");
@@ -313,7 +315,7 @@ public class BrowserUtils {
     }
 
     public void performMouseHover(WebElement element) {
-        Actions act = new Actions(Driver.getDriver());
+        Actions act = new Actions(getDriver());
         act.moveToElement(element).build().perform();
     }
 
@@ -328,9 +330,9 @@ public class BrowserUtils {
 
     public static void assertTitleContains(String expectedTitle, int timeout) {
         Boolean titleContains;
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.titleContains(expectedTitle));
-        String actualTitle = Driver.getDriver().getTitle();
+        String actualTitle = getDriver().getTitle();
         if (actualTitle.contains(expectedTitle)) {
             titleContains = true;
         } else {
@@ -341,12 +343,12 @@ public class BrowserUtils {
 
     public boolean VerifyElementExists(String xpath) {
         //Waits.waitForVisibility(element,10);
-        return (Driver.getDriver().findElements((By.xpath(xpath))).size() >= 1);
+        return (getDriver().findElements((By.xpath(xpath))).size() >= 1);
     }
 
     public void SwitchToNewTab() {
-        ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-        Driver.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
+        ArrayList<String> tabs = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs.get(tabs.size() - 1));
     }
     public static boolean isElementPresent(WebElement element){
         Waits.waitForPageToLoad(10);
@@ -354,12 +356,12 @@ public class BrowserUtils {
     }
 
     public static void clickByElement (String xpath){
-        WebElement element  = Driver.getDriver().findElement(By.xpath(xpath));
+        WebElement element  = getDriver().findElement(By.xpath(xpath));
         Waits.waitForClickability(element,30);
         element.click();
     }
     public static  void ClickBack(){
-        Driver.getDriver().navigate().back();
+        getDriver().navigate().back();
     }
 
 
@@ -574,9 +576,9 @@ public class BrowserUtils {
     }
 
     public void CloseAddIfExists() {
-        if (!Driver.getDriver().findElements(By.xpath("//span[contains(text(),'CONTINUE SHOPPING')]")).isEmpty()) {
+        if (!getDriver().findElements(By.xpath("//span[contains(text(),'CONTINUE SHOPPING')]")).isEmpty()) {
             try {
-                clickWithJS(Driver.getDriver().findElement(By.xpath("")));
+                clickWithJS(getDriver().findElement(By.xpath("")));
             } catch (Exception ex) {
                 System.out.println("Into Exception clause ... Continue Shopping  add  doesn't exist");
             }
@@ -589,10 +591,10 @@ public class BrowserUtils {
 
     private static void closeMultipleTabsExceptCurrentTab() throws InterruptedException {
         // Get all open tabs
-        Set<String> allTabs = Driver.getDriver().getWindowHandles();
+        Set<String> allTabs = getDriver().getWindowHandles();
 
         // Get Current tab
-        String currentTab = Driver.getDriver().getWindowHandle();
+        String currentTab = getDriver().getWindowHandle();
 
         Iterator<String> iterator = allTabs.iterator();
 
@@ -601,19 +603,19 @@ public class BrowserUtils {
             String selectedTab = iterator.next();
             if(!selectedTab.equals(currentTab)) {
                 // Switch to new tab
-                Driver.getDriver().switchTo().window(selectedTab);
+                getDriver().switchTo().window(selectedTab);
 
                 // Print title of tabs to be closed
-                System.out.println("Closing Tab = "+Driver.getDriver().getTitle());
+                System.out.println("Closing Tab = "+getDriver().getTitle());
 
                 // Close the selected tab
-                Driver.getDriver().close();
+                getDriver().close();
 
                 // Time delay
                 Waits.waitFixedTime(1);
             }
             else{
-                Driver.getDriver().switchTo().window(selectedTab);
+                getDriver().switchTo().window(selectedTab);
             }
         }
     }

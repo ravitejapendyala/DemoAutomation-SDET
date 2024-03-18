@@ -10,11 +10,13 @@ import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
+import static org.selenium.driver.DriverManager.getDriver;
+
 public class Waits {
 
 
     public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeToWaitInSec));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeToWaitInSec));
         return wait.until(ExpectedConditions.visibilityOf(element));
 
     }
@@ -26,12 +28,12 @@ public class Waits {
     }
 
     public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static WebElement waitForClickability(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
@@ -41,7 +43,7 @@ public class Waits {
     }
 
     public static WebElement waitForClickability(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -53,7 +55,7 @@ public class Waits {
         };
         try {
             System.out.println("Waiting for page to load...");
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeOutInSeconds));
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
             wait.until(expectation);
         } catch (Throwable error) {
             System.out.println(
@@ -62,7 +64,7 @@ public class Waits {
     }
 
     public static WebElement fluentWait(final WebElement webElement, int timeinsec) {
-        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
                 .withTimeout(Duration.ofSeconds(timeinsec))
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class);
@@ -120,7 +122,7 @@ public class Waits {
     public static void waitForLoader() {
 
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(120));
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'invisible-when-ready')]")));
 
         } catch (TimeoutException e) {
@@ -131,7 +133,7 @@ public class Waits {
     public static void waitForBlocker() {
 
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(120));
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(text(),'Loading')]")));
 
         } catch (TimeoutException e) {
@@ -140,7 +142,7 @@ public class Waits {
     }
 
     public static void waitForPresence(String xpath, int timeToWaitInSec) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeToWaitInSec));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeToWaitInSec));
         //return wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
     }
@@ -165,7 +167,7 @@ public class Waits {
         }
     }
 
-//    static void waitForPageLoad(WebDriver Driver.getDriver()) {
+//    static void waitForPageLoad(WebDriver getDriver()) {
 //        Predicate<WebDriver> pageLoaded = new Predicate<WebDriver>() {
 //
 //            @Override
@@ -178,8 +180,8 @@ public class Waits {
 //    }
 
 //    public static void WaitUntilDocumentIsReady( WebDriver driver, int timeoutInSeconds) {
-//        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
-//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(120));
+//        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+//        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(120));
 //
 //        try {
 //            Func<WebDriver, bool> readyCondition = webDriver => (bool)jse.executeScript("return (document.readyState == 'complete' && jQuery.active == 0)");
