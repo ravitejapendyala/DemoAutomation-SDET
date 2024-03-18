@@ -42,7 +42,7 @@ public final class ExtentReport {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yy HH-mm-ss");
 			String path =  "SparkReport " + now.format(formatter);
 			File file = new File("test-output/"+path+"/extentReport.html");
-			ExtentSparkReporter spark = new ExtentSparkReporter(file);
+			ExtentSparkReporter spark = new ExtentSparkReporter(FrameworkConstants.getExtentReportFilePath());
 			/*
 			 * .viewConfigurer() .viewOrder() .as(new ViewName[] { ViewName.DASHBOARD,
 			 * ViewName.TEST, //ViewName.TAG, ViewName.CATEGORY, ViewName.AUTHOR,

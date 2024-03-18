@@ -100,7 +100,7 @@ public class AutomationDemoTest extends BaseTest {
         languageDropdown.click();
 
         // Locate and click on the desired language option (e.g., English)
-        WebElement englishOption = getDriver().findElement(By.xpath("//a[contains(text(),'English')]"));
+        WebElement englishOption = getDriver().findElement(By.xpath("//a[contains(text(),'English1')]"));
         englishOption.click();
         address.click();
 
