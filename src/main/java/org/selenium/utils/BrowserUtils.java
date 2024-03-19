@@ -1,6 +1,6 @@
-package com.demo.utilities;
+package org.selenium.utils;
 
-import org.junit.Assert;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.selenium.utils.CustomException;
+import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
 
-import static org.junit.Assert.assertTrue;
+
 import static org.selenium.driver.DriverManager.getDriver;
 
 public class BrowserUtils {
@@ -156,7 +156,7 @@ public class BrowserUtils {
      */
     public static void verifyElementDisplayed(By by) {
         try {
-            assertTrue("Element not visible: " + by, getDriver().findElement(by).isDisplayed());
+            Assert.assertTrue(getDriver().findElement(by).isDisplayed(), "Element not visible: " + by);
         } catch (NoSuchElementException e) {
             Assert.fail("Element not found: " + by);
         }
@@ -175,7 +175,7 @@ public class BrowserUtils {
      */
     public static void verifyElementDisplayed(WebElement element) {
         try {
-            assertTrue("Element not visible: " + element, element.isDisplayed());
+            Assert.assertTrue(element.isDisplayed(), "Element not visible: " + element);
         } catch (NoSuchElementException e) {
             Assert.fail("Element not found: " + element);
         }

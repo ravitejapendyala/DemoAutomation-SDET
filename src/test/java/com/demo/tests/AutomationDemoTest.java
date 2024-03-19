@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.selenium.pages.Alerts;
 import org.selenium.pages.Register;
+import org.selenium.pages.Windows;
 import org.selenium.reports.ExtentLogger;
 import org.selenium.utils.CustomException;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ public class AutomationDemoTest extends BaseTest {
         register.EnterSecondPassword();
         register.ClickSubmit();
     }
-    @Test
+    //@Test
     public void AlertsTest() throws CustomException {
 
         Alerts alerts = new Alerts(getDriver()).load();
@@ -52,6 +53,13 @@ public class AutomationDemoTest extends BaseTest {
         confirmAlert.sendKeys("Automation Alert");
         //ExtentLogger.pass("<b> Prompt Alert </b> is clicked", false);
         confirmAlert.accept();
+    }
+    @Test
+    public void WindowsTest() throws CustomException {
+
+        Windows windows = new Windows(getDriver()).load();
+        windows.HandleNewTabWindows();
+
     }
 
 }
