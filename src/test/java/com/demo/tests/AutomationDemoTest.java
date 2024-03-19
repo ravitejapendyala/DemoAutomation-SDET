@@ -55,10 +55,12 @@ public class AutomationDemoTest extends BaseTest {
         confirmAlert.accept();
     }
     @Test
-    public void WindowsTest() throws CustomException {
+    public void WindowsTest() throws CustomException, InterruptedException {
 
         Windows windows = new Windows(getDriver()).load();
         windows.HandleNewTabWindows();
+        windows.HandleNewWindow();
+        windows.HandleMultipleNewWindows();
 
     }
 

@@ -31,11 +31,12 @@ public class Windows extends BasePage {
 	public Windows(WebDriver driver) {
 		super(driver);
 		faker = new Faker();
-		//browserUtils = new BrowserUtils();
+		browserUtils = new BrowserUtils();
 
 	}
 
-	private final By click = By.xpath("//button[contains(text(),'click the button to display an  alert box')]");
+	private final By OpenNewSeperateWindows_btn = By.xpath("//a[contains(text(),'Open New Seperate Windows')]");
+	private final By OpenSeperateMultipleWindows_btn = By.xpath("//a[contains(text(),'Open Seperate Multiple Windows')]");
 	private final By ConfirmAlert = By.xpath("//button[contains(text(),'click the button to display a confirm box')]");
 	private final By PromptAlert = By.xpath("//button[contains(text(),'click the button to demonstrate the prompt box')]");
 	private final By ConfirmAlert_btn = By.xpath("//a[text()='Alert with OK & Cancel ']");
@@ -48,32 +49,50 @@ public class Windows extends BasePage {
 		return this;
 	}
 
-	public void HandleNewTabWindows() throws CustomException {
+	public void HandleNewTabWindows() throws CustomException, InterruptedException {
 
 		//driver.findElement(By.xpath("(//button[contains(text(),'click')])[1]")).click();
-		findElement(driver,By.xpath("(//button[contains(text(),'click')])[1]"),10,"click");
+		click(By.xpath("(//button[contains(text(),'click')])[1]"),WaitStrategy.PRESENCE,"Click Button");
+		//findElement(driver,By.xpath("(//button[contains(text(),'click')])[1]"),10,"click");
 		browserUtils.SwitchToNewTab();
 		Assert.assertTrue(driver.getTitle().contains("Selenium"));
 		ExtentLogger.pass("Switched to newly opened tab",true);
-
-
-	}public void ClickConfirmAlert() throws CustomException {
-
-		click(ConfirmAlert_btn,WaitStrategy.PRESENCE,"Confirm Button");
-
-		waitForGivenTime(2);
-		driver.findElement(ConfirmAlert).click();
-
-		waitForGivenTime(2);
-	}public void ClickPromptAlert() throws CustomException {
-
-		click(PromptAlert_btn,WaitStrategy.PRESENCE,"Prompt Button");
-
-		waitForGivenTime(2);
-		driver.findElement(PromptAlert).click();
-
-		waitForGivenTime(2);
+		browserUtils.switchToChildWindow(driver,0);
+		BrowserUtils.closeMultipleTabsExceptCurrentTabNew();
 	}
+
+	public void HandleNewWindow() throws CustomException, InterruptedException {
+
+		//driver.findElement(By.xpath("(//button[contains(text(),'click')])[1]")).click();
+
+		click(OpenNewSeperateWindows_btn,WaitStrategy.PRESENCE,"Open New Separate eWindows button");
+		waitForGivenTime(2);
+		click(By.xpath("(//button[contains(text(),'click')])[2]"),WaitStrategy.PRESENCE,"Click Button");
+		//findElement(driver,By.xpath("(//button[contains(text(),'click')])[1]"),10,"click");
+		browserUtils.switchToWindow("Selenium");
+		Assert.assertTrue(driver.getTitle().contains("Selenium"));
+		ExtentLogger.pass("Switched to newly opened window",true);
+		browserUtils.switchToChildWindow(driver,0);
+		BrowserUtils.closeMultipleTabsExceptCurrentTabNew();
+	}
+	public void HandleMultipleNewWindows() throws CustomException, InterruptedException {
+
+		//driver.findElement(By.xpath("(//button[contains(text(),'click')])[1]")).click();
+
+		click(OpenSeperateMultipleWindows_btn,WaitStrategy.PRESENCE,"Open Separate Multiple Windows button");
+		waitForGivenTime(2);
+		click(By.xpath("(//button[contains(text(),'click')])[3]"),WaitStrategy.PRESENCE,"Click Button");
+		//findElement(driver,By.xpath("(//button[contains(text(),'click')])[1]"),10,"click");
+		browserUtils.switchToChildWindow(driver,1);
+		Assert.assertTrue(driver.getTitle().contains("Index"));
+		ExtentLogger.pass("Switched to newly opened tab Index",true);
+		browserUtils.switchToChildWindow(driver,2);
+		Assert.assertTrue(driver.getTitle().contains("Selenium"));
+		ExtentLogger.pass("Switched to newly opened tab Selenium",true);
+		browserUtils.switchToChildWindow(driver,0);
+		BrowserUtils.closeMultipleTabsExceptCurrentTabNew();
+	}
+
 
 
 

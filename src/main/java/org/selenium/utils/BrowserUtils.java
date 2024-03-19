@@ -551,8 +551,9 @@ public class BrowserUtils {
     }
 
     public static void switchToParentTab() {
-        webDriver.close();
-        webDriver.switchTo().window(parent_tab);
+        getDriver().close();
+        parent_tab = getDriver().getWindowHandle();
+        getDriver().switchTo().window(parent_tab);
     }
 
     public static void openNewEmtpyTab(WebDriver driver) {
@@ -587,7 +588,7 @@ public class BrowserUtils {
 
     }
 
-    private static void closeMultipleTabsExceptCurrentTab() throws InterruptedException {
+    public static void closeMultipleTabsExceptCurrentTab() throws InterruptedException {
         // Get all open tabs
         Set<String> allTabs = getDriver().getWindowHandles();
 
@@ -616,6 +617,22 @@ public class BrowserUtils {
                 getDriver().switchTo().window(selectedTab);
             }
         }
+    }
+    public static void closeMultipleTabsExceptCurrentTabNew() throws InterruptedException {
+        Set<String> windowHandles = getDriver().getWindowHandles();
+
+// Iterate over all window handles except for the parent tab
+        for (String handle : windowHandles) {
+            if (!handle.equals(getDriver().getWindowHandles().toArray()[0].toString())) {
+                // Switch to the child tab
+                getDriver().switchTo().window(handle);
+                // Close the child tab
+                getDriver().close();
+            }
+        }
+
+// Switch back to the parent tab
+        getDriver().switchTo().window(getDriver().getWindowHandles().toArray()[0].toString());
     }
 
 
