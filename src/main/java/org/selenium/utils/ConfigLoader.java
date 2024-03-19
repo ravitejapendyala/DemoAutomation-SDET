@@ -26,6 +26,8 @@ public class ConfigLoader {
 	// private final Properties properties;
 	private static ConfigLoader configLoader;
 
+	private static final String PASSED_STEPS_SCREENSHOT = "passed_steps_screenshot";
+
 	private ConfigLoader() {
 
 		properties = getConfigPropertyFile(RESOURCES_PATH+CONFIG_PROPERTIES);
@@ -34,6 +36,10 @@ public class ConfigLoader {
 
 	private Properties getConfigPropertyFile(String configFile) {
 		return PropertyUtils.propertyLoader(configFile);
+	}
+
+	public String getPassedStepsScreenshot() {
+		return getPropertyValue(PASSED_STEPS_SCREENSHOT);
 	}
 
 	private String getPropertyValue(String propertyKey) {

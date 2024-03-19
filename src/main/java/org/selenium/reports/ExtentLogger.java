@@ -15,7 +15,9 @@ package org.selenium.reports;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.markuputils.Markup;
+import io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties;
 import org.selenium.utils.ConfigLoader;
+import org.selenium.utils.PropertyUtils;
 import org.selenium.utils.ScreenshotUtils;
 
 import static org.selenium.constants.FrameworkConstants.YES;
@@ -58,12 +60,12 @@ public final class ExtentLogger {
 	}
 
 	public static void pass(String message, boolean isScreeshotNeeded) {
-		// if
-		// (PropertyUtils.get(ConfigProperties.PASSED_STEPS_SCREENSHOT).equalsIgnoreCase("yes")
-		// && isScreeshotNeeded) {
-
+		if (ConfigLoader.getInstance().getPassedStepsScreenshot().equalsIgnoreCase(YES) && isScreeshotNeeded) {
 			ExtentManager.getExtentTest().pass(message,
 					MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+		} else {
+			pass(message);
+		}
 
 	}
 
