@@ -15,7 +15,7 @@ import org.selenium.utils.CustomException;
 import org.testng.annotations.Test;
 
 public class AutomationDemoTest extends BaseTest {
-    //@Test
+    @Test
     public void RegistrationTest() throws CustomException {
 
         Register register = new Register(getDriver()).load();
@@ -35,7 +35,7 @@ public class AutomationDemoTest extends BaseTest {
         register.EnterSecondPassword();
         register.ClickSubmit();
     }
-    //@Test
+    @Test
     public void AlertsTest() throws CustomException {
 
         Alerts alerts = new Alerts(getDriver()).load();
@@ -55,7 +55,7 @@ public class AutomationDemoTest extends BaseTest {
         //ExtentLogger.pass("<b> Prompt Alert </b> is clicked", false);
         confirmAlert.accept();
     }
-    //@Test
+    @Test
     public void WindowsTest() throws CustomException, InterruptedException {
 
         Windows windows = new Windows(getDriver()).load();
