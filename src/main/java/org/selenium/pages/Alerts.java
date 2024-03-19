@@ -47,24 +47,24 @@ public class Alerts extends BasePage {
 	public void ClickSimpleAlert() throws CustomException {
 
 		driver.findElement(SimpleAlert).click();
-		//click(SimpleAlert,WaitStrategy.PRESENCE,"Simple Button");
+
 		waitForGivenTime(2);
-		//findElement(driver,SimpleAlert,10,"Simple Button","click");
+
 	}public void ClickConfirmAlert() throws CustomException {
 
 		click(ConfirmAlert_btn,WaitStrategy.PRESENCE,"Confirm Button");
-		//findElement(driver,ConfirmAlert_btn,10,"Confirm Button","click");
+
 		waitForGivenTime(2);
 		driver.findElement(ConfirmAlert).click();
-		//findElement(driver,ConfirmAlert,10,"Confirm Alert","click");
+
 		waitForGivenTime(2);
 	}public void ClickPromptAlert() throws CustomException {
-		//waitForGivenTime(2);
+
 		click(PromptAlert_btn,WaitStrategy.PRESENCE,"Prompt Button");
-		//findElement(driver,PromptAlert_btn,10,"Prompt Button","click");
+
 		waitForGivenTime(2);
 		driver.findElement(PromptAlert).click();
-		//findElement(driver,PromptAlert,10,"Prompt Alert","click");
+
 		waitForGivenTime(2);
 	}
 
