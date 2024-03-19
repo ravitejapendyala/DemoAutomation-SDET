@@ -127,6 +127,9 @@ public class BrowserUtils {
         Waits.waitForVisibility(element, 120);
         getDriver().switchTo().frame(element);
     }
+    public void switchToFrame(int index) {
+        getDriver().switchTo().frame(index);
+    }
 
     public void switchToDefaultContent() {
 

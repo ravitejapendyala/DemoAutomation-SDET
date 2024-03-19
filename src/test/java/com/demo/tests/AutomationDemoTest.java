@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.selenium.pages.Alerts;
+import org.selenium.pages.Frames;
 import org.selenium.pages.Register;
 import org.selenium.pages.Windows;
 import org.selenium.reports.ExtentLogger;
@@ -54,13 +55,21 @@ public class AutomationDemoTest extends BaseTest {
         //ExtentLogger.pass("<b> Prompt Alert </b> is clicked", false);
         confirmAlert.accept();
     }
-    @Test
+    //@Test
     public void WindowsTest() throws CustomException, InterruptedException {
 
         Windows windows = new Windows(getDriver()).load();
         windows.HandleNewTabWindows();
         windows.HandleNewWindow();
         windows.HandleMultipleNewWindows();
+
+    }
+    @Test
+    public void FramesTest() throws CustomException, InterruptedException {
+
+        Frames frames = new Frames(getDriver()).load();
+        frames.EnterDataInsideFrame();
+        frames.EnterDataInsideNestedFrame();
 
     }
 
