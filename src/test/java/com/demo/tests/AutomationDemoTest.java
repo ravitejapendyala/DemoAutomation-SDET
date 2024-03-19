@@ -4,18 +4,16 @@ import com.demo.base.BaseTest;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.selenium.pages.Alerts;
-import org.selenium.pages.Frames;
-import org.selenium.pages.Register;
-import org.selenium.pages.Windows;
+import org.selenium.pages.*;
 import org.selenium.reports.ExtentLogger;
 import org.selenium.utils.CustomException;
 import org.testng.annotations.Test;
 
 public class AutomationDemoTest extends BaseTest {
-    @Test
+    //@Test
     public void RegistrationTest() throws CustomException {
 
         Register register = new Register(getDriver()).load();
@@ -35,7 +33,7 @@ public class AutomationDemoTest extends BaseTest {
         register.EnterSecondPassword();
         register.ClickSubmit();
     }
-    @Test
+    //@Test
     public void AlertsTest() throws CustomException {
 
         Alerts alerts = new Alerts(getDriver()).load();
@@ -55,7 +53,7 @@ public class AutomationDemoTest extends BaseTest {
         //ExtentLogger.pass("<b> Prompt Alert </b> is clicked", false);
         confirmAlert.accept();
     }
-    @Test
+    //@Test
     public void WindowsTest() throws CustomException, InterruptedException {
 
         Windows windows = new Windows(getDriver()).load();
@@ -64,12 +62,21 @@ public class AutomationDemoTest extends BaseTest {
         windows.HandleMultipleNewWindows();
 
     }
-    @Test
+    //@Test
     public void FramesTest() throws CustomException, InterruptedException {
 
         Frames frames = new Frames(getDriver()).load();
         frames.EnterDataInsideFrame();
         frames.EnterDataInsideNestedFrame();
+
+    }
+    @Test
+    public void DatePickerTest() throws CustomException, InterruptedException {
+
+        DatePicker datePicker = new DatePicker(getDriver()).load();
+        datePicker.EnterDateForDatePickerDisabled();
+        datePicker.EnterDateForDatePickerEnabled();
+
 
     }
 

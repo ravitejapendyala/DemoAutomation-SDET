@@ -105,6 +105,12 @@ public class BasePage {
 		ExtentLogger.pass("<b>" + value + "</b> is entered successfully in <b>" + elementName + "</b>", true);
 		// log(PASS,value +" is entered successfully in "+elementName);
 	}
+	protected void SendKeys(By by, String value, WaitStrategy waitStrategy, String elementName) {
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		element.sendKeys(value);
+		ExtentLogger.pass("<b>" + value + "</b> is entered successfully in <b>" + elementName + "</b>", true);
+		// log(PASS,value +" is entered successfully in "+elementName);
+	}
 
 	/*
 	 * protected String getElementName(By by) { return
