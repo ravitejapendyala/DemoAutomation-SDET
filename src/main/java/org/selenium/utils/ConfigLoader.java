@@ -33,7 +33,7 @@ public class ConfigLoader {
 	}
 
 	private Properties getConfigPropertyFile(String configFile) {
-		return PropertyUtils.propertyLoader(RESOURCES_PATH + configFile);
+		return PropertyUtils.propertyLoader(configFile);
 	}
 
 	private String getPropertyValue(String propertyKey) {
@@ -43,6 +43,13 @@ public class ConfigLoader {
 		} else {
 			throw new RuntimeException("Property " + propertyKey + " is not specified in the config.properties file");
 		}
+	}
+
+	public static ConfigLoader getInstance() {
+		if (configLoader == null) {
+			configLoader = new ConfigLoader();
+		}
+		return configLoader;
 	}
 
 	public String getBaseUrl() {

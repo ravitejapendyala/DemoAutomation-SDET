@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.selenium.utils.CustomException;
 
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -67,11 +67,7 @@ public class BrowserUtils {
         return element.getText();
     }
 
-    public static void selectByVisibleText(WebElement element, String text) {
-        Waits.waitForVisibility(element, 30);
-        Select dropDown = new Select(element);
-        dropDown.selectByVisibleText(text);
-    }
+
 
     public boolean isElementVisible(WebElement element) {
         try {

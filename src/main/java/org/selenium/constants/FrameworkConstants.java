@@ -22,10 +22,12 @@ public class FrameworkConstants {
 	private static final String PROJECT_PATH = System.getProperty("user.dir");
 
 	public static final String ICON_BUG = "<i class='fa fa-bug' ></i>";
+	public static final String ICON_Navigate_Right = "<i class='fa fa-arrow-circle-right' ></i>";
 
 
 	public static final String YES = "yes";
 	private static final int EXPLICIT_WAIT = 10;
+	public static final int WAIT = 5;
 	private static String extentReportFilePath = "";
 
 	public static String getExtentReportFilePath() {

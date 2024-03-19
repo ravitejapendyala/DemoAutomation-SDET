@@ -5,12 +5,14 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.selenium.pages.Register;
+import org.selenium.utils.CustomException;
 import org.testng.annotations.Test;
 
 public class AutomationDemoTest extends BaseTest {
 
     //ExtentTest test;
-    @Test
+    //@Test
     public void RegistrationTest(){
         getDriver().get("https://demo.automationtesting.in/Register.html");
         Faker faker = new Faker();
@@ -76,7 +78,7 @@ public class AutomationDemoTest extends BaseTest {
         email.sendKeys(emailId);
         submitButton.click();
     }
-    @Test
+    //@Test
     public void RegistrationTest2(){
         getDriver().get("https://demo.automationtesting.in/Register.html");
         Faker faker = new Faker();
@@ -92,8 +94,7 @@ public class AutomationDemoTest extends BaseTest {
         WebElement address = getDriver().findElement(By.xpath("//textarea[@ng-model='Adress']"));
         address.sendKeys("123 Street, City, Country");
 
-        // Select Language as English
-// Locate and interact with the elements on the registration form
+
         WebElement languageDropdown = getDriver().findElement(By.xpath("//div[@id='msdd']"));
 
         // Click on the language dropdown to open the options
@@ -106,7 +107,7 @@ public class AutomationDemoTest extends BaseTest {
 
         // Select Country
         WebElement countryDropdown = getDriver().findElement(By.xpath("//span[@id='select2-country-container']/following-sibling::span"));
-        //Select countryDropdown = new Select(getDriver().findElement(By.id("select2-country-container")));
+
         countryDropdown.click();
         WebElement IndiaOption = getDriver().findElement(By.xpath("//*[contains(text(),'India')]"));
         IndiaOption.click();
@@ -141,6 +142,27 @@ public class AutomationDemoTest extends BaseTest {
 
         email.sendKeys(emailId);
         submitButton.click();
+    }
+
+    @Test
+    public void RegistrationTest3() throws CustomException {
+
+        Register register = new Register(getDriver()).load();
+        register.EnterFirstName();
+        register.EnterLastName();
+        register.EnterAddress();
+        register.EnterEmail();
+        register.SelectCountry();
+        register.SelectGender();
+        register.SelectLanguage();
+        register.SelectyYear();
+        register.SelectyMonth();
+        register.SelectyDay();
+        register.EnterTelephone();
+        register.UploadPicture();
+        register.EnterFirstPassword();
+        register.EnterSecondPassword();
+        register.ClickSubmit();
     }
 
 }

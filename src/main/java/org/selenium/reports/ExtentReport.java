@@ -60,11 +60,6 @@ public final class ExtentReport {
 			extent.flush();
 		}
 		ExtentManager.unload();
-		try {
-			Desktop.getDesktop().browse(new File(FrameworkConstants.getExtentReportFilePath()).toURI());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static void createTest(String testCaseName) {

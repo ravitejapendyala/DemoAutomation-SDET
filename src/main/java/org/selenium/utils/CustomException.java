@@ -1,4 +1,4 @@
-package com.demo.utilities;
+package org.selenium.utils;
 
 public class CustomException extends  Exception{
 
