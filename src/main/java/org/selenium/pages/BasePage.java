@@ -22,6 +22,7 @@ import org.selenium.utils.ScreenshotUtils;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static org.selenium.constants.FrameworkConstants.ICON_Navigate_Right;
 import static org.selenium.constants.FrameworkConstants.WAIT;
@@ -177,6 +178,24 @@ public class BasePage {
 			System.out.println(e.getMessage());
 		}
 		js.executeScript("arguments[0].setAttribute('style',arguments[1]);", element, style);
+
+	}
+
+	public static List<WebElement> findElements(WebDriver driver, By locator, final int timeoutSeconds) throws CustomException {
+
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeoutSeconds)).withMessage("Not able to locate element " + locator).pollingEvery(Duration.ofMillis(500)).ignoring(NoSuchElementException.class);
+
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver webDriver) {
+				return driver.findElement(locator);
+			}
+
+		});
+		if (element.isDisplayed()) {
+			List<WebElement> elementsList = (List<WebElement>) driver.findElements(locator);
+			return elementsList;
+		}
+		throw new CustomException("Elements " + locator + " is not visible");
 
 	}
 

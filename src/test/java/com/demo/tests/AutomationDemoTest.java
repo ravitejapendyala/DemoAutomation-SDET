@@ -70,12 +70,21 @@ public class AutomationDemoTest extends BaseTest {
         frames.EnterDataInsideNestedFrame();
 
     }
-    @Test
+    //@Test
     public void DatePickerTest() throws CustomException, InterruptedException {
 
         DatePicker datePicker = new DatePicker(getDriver()).load();
         datePicker.EnterDateForDatePickerDisabled();
         datePicker.EnterDateForDatePickerEnabled();
+
+
+    }
+    @Test
+    public void SelectableTest() throws CustomException, InterruptedException {
+
+        Selectable selectable = new Selectable(getDriver()).load();
+        selectable.selectTabsInDefault();
+
 
 
     }
