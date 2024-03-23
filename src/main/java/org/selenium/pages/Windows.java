@@ -58,10 +58,10 @@ public class Windows extends BasePage {
 		waitForGivenTime(2);
 		click(By.xpath("(//button[contains(text(),'click')])[3]"),WaitStrategy.PRESENCE,"Click Button");
 		waitForGivenTime(2);
-		browserUtils.switchToChildWindow(driver,1);
+		browserUtils.switchToWindow("Index");
 		Assert.assertTrue(driver.getTitle().contains("Index"));
 		ExtentLogger.pass("Switched to newly opened tab Index",true);
-		browserUtils.switchToChildWindow(driver,2);
+		browserUtils.switchToWindow("Selenium");
 		Assert.assertTrue(driver.getTitle().contains("Selenium"));
 		ExtentLogger.pass("Switched to newly opened tab Selenium",true);
 		browserUtils.switchToChildWindow(driver,0);
