@@ -119,9 +119,9 @@ public class BaseTest {
             // browser = String.valueOf(BrowserType.EDGE);
             // browser = BrowserType.EDGE.toString().toUpperCase();
             // browser = (BrowserType.EDGE).name().toLowerCase();
-            browser = "EDGE";
+            browser = "CHROME";
             System.out.println(
-                    "Test execution not done by Maven cmd or TestNG.xml file ->  setting the value: " + "EDGE");
+                    "Test execution not done by Maven cmd or TestNG.xml file ->  setting the value: " + "CHROME");
         }
 
         /* This is for test case execution from Maven command line or testng.xml file */

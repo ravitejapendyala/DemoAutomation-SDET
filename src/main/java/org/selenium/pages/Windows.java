@@ -57,6 +57,7 @@ public class Windows extends BasePage {
 		click(OpenSeperateMultipleWindows_btn,WaitStrategy.PRESENCE,"Open Separate Multiple Windows button");
 		waitForGivenTime(2);
 		click(By.xpath("(//button[contains(text(),'click')])[3]"),WaitStrategy.PRESENCE,"Click Button");
+		waitForGivenTime(2);
 		browserUtils.switchToChildWindow(driver,1);
 		Assert.assertTrue(driver.getTitle().contains("Index"));
 		ExtentLogger.pass("Switched to newly opened tab Index",true);
