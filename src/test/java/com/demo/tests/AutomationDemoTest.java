@@ -84,6 +84,7 @@ public class AutomationDemoTest extends BaseTest {
 
         Selectable selectable = new Selectable(getDriver()).load();
         selectable.selectTabsInDefault();
+        selectable.selectTabsInSerialize();
 
 
 

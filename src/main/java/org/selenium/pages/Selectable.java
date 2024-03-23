@@ -27,9 +27,7 @@ public class Selectable extends BasePage {
 	}
 
 	private final By default_selectable_tabs = By.xpath("//ul[@class='deaultFunc']/li");
-	private final By OpenSeperateMultipleWindows_btn = By.xpath("//a[contains(text(),'Open Seperate Multiple Windows')]");
-
-
+	private final By serialize_selectable_tabs = By.xpath("//ul[@class='SerializeFunc']/li");
 
 	public Selectable load() {
 		load("Selectable.html");
@@ -41,7 +39,19 @@ public class Selectable extends BasePage {
 		List<WebElement> tabs = findElements(driver,default_selectable_tabs,10);
 		for (WebElement ele: tabs) {
 			ele.click();
-			ExtentLogger.pass("Clicked on to "+ele.findElement(By.tagName("b")).getText()+"",true);
+			waitForGivenTime(1);
+			ExtentLogger.pass("Clicked on "+ele.findElement(By.tagName("b")).getText()+"",true);
+		}
+	}
+	public void selectTabsInSerialize() throws CustomException, InterruptedException {
+		click(By.partialLinkText("Serializ"),WaitStrategy.PRESENCE,"Serialize button");
+		//findElement(driver,By.partialLinkText("Serializ"),10,"click");
+		waitForGivenTime(3);
+		List<WebElement> tabs = findElements(driver,serialize_selectable_tabs,10);
+		for (WebElement ele: tabs) {
+			ele.click();
+			waitForGivenTime(1);
+			ExtentLogger.pass("Clicked on "+ele.findElement(By.tagName("b")).getText()+"",true);
 		}
 	}
 
